@@ -4,13 +4,44 @@ namespace HangmanProject
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            Console.WriteLine("Non-Player please enter a word: ");
+            string userIn = Console.ReadLine();
+            char[] array = userIn.ToCharArray();
+            Console.Clear();
+            GetLetter();
+            /*for (int i = 0; i < array.Length; i++)
+            {
+                char letter = array[i];
+                Console.WriteLine($"Letter: {letter}");                               
+            }*/
+        }
+
+        internal static char GetLetter()
+        {
+            bool isInputLetter = false;
+            char userChar = '1';
+            do
+            {
+                Console.WriteLine("Please enter a lowercase letter: ");
+                userChar = (char)Console.Read();
+                if (userChar == 'a' || userChar == 'b' || userChar == 'c' || userChar == 'd' || userChar == 'e'
+                    || userChar == 'f' || userChar == 'g' || userChar == 'h' || userChar == 'i' || userChar == 'j' || userChar == 'k' || userChar == 'l' || userChar == 'm'
+                    || userChar == 'n' || userChar == 'o' || userChar == 'p' || userChar == 'q' || userChar == 'r' || userChar == 's' || userChar == 't' || userChar == 'u'
+                    || userChar == 'v' || userChar == 'w' || userChar == 'x' || userChar == 'y' || userChar == 'z')
+                {
+                    isInputLetter = true;
+                }
+
+            } while (!isInputLetter);
+
+            return userChar;
 
         }
     }
 
-    class Display
+    /*Class Display
     {
 
         protected static int origRow;
@@ -93,5 +124,5 @@ namespace HangmanProject
     class Words
     {
 
-    }
+    }*/
 }
