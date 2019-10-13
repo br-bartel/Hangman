@@ -25,32 +25,37 @@ namespace HangmanProject
 
             while (true) // loops until win or loss condition is met
             {
-                Console.Write($"Please enter a letter:           "); //Changed this to Write from WriteLine
+                Console.Write($"Please enter a letter:\t\t"); //Changed this to Write from WriteLine
                 display.UpdateBlanks(resultArray);
                 Console.WriteLine();
+                Console.Write("\t\t\t\t");
+                display.AllPlayerGuesses();
+
                 if (!char.TryParse(Console.ReadLine(), out char playerGuess)) // makes the player reenter a char if it doesn't parse to a char
-                    Console.WriteLine("\n");
-
-
-                //bool[] correctIndex = new bool[array.Length];
-
-                for (int j = 0; j < array.Length; j++) // checks user input against the mystery word
                 {
-                    if (playerGuess == array[j]) // sets the corresponding array space to the letter if they match
-                    {
-                        resultArray[j] = playerGuess;
-                        //correctIndex[j] = true;
-                        
-                    }
-                    
+                    Console.WriteLine("\n");
+                    Console.Clear();
                 }
-                display.UpdateBlanks(resultArray);
+                else
+                {
+                    //bool[] correctIndex = new bool[array.Length];
 
-                //Console.WriteLine(resultArray);
+                    for (int j = 0; j < array.Length; j++) // checks user input against the mystery word
+                    {
+                        if (playerGuess == array[j]) // sets the corresponding array space to the letter if they match
+                        {
+                            resultArray[j] = playerGuess;
+                            //correctIndex[j] = true;
+                        }
+                    }
+                    display.UpdateBlanks(resultArray);
+                    display.AllPlayerGuesses(playerGuess);
+                    //Console.WriteLine(resultArray);
 
-                if (array.SequenceEqual(resultArray))
-                    break;
-                Console.Clear();
+                    if (array.SequenceEqual(resultArray))
+                        break;
+                    Console.Clear();
+                }
                 //Console.WriteLine(array.SequenceEqual(resultArray));   
             }
 
@@ -72,31 +77,32 @@ namespace HangmanProject
         //        BlankPosition += 2;
         //    }
         //}
-
-        //Updates blanks of userIn with correctly guessed letters
+        string PlayerGuesses = "";
+        //Displays Previous Guesses
+        public void AllPlayerGuesses()
+        {
+            Console.Write("Your Guesses: " + PlayerGuesses);
+        }
+        //Updates Previous Guesses
+        public void AllPlayerGuesses(char playerGuess)
+        {
+            PlayerGuesses += playerGuess + " ";
+            Console.Write("Your Guesses: " + playerGuess);
+        }
+        //Reads and displays resultArray with correctly guessed letters
         public void UpdateBlanks(char[] resultArray)
         {
             foreach(char letter in resultArray)
             {
-                if (letter == '\0')
+                if (letter == '\0') //If array index is default char value
                 {
                     Console.Write("_ ");
                 }
                 else
                 {
-                    Console.Write(letter + " ");
+                    Console.Write(letter + " "); //Place letter in position of correctly guess letter
                 }
             }
-
-            //for (int i = 0; i < indexOfCorrect.Length; i++)
-            //{
-            //    if (indexOfCorrect[i] == true)
-            //    {
-            //        int IndexOfBlank = i * 2; //indexes correct letter to correct x position for WriteAt
-            //        string letterToDisplay = Convert.ToString(playerGuess); //converts correct char to string for WriteAt
-            //        WriteAt(letterToDisplay, IndexOfBlank, 0);
-            //    }
-            //}
         }
 
 
